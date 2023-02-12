@@ -1,4 +1,4 @@
-Shader "Window"
+Shader "Dylan/Window"
 {
     Properties
     {

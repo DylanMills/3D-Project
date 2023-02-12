@@ -1,4 +1,4 @@
-Shader "Custom/Tree"
+Shader "Dylan/Tree"
 {
     Properties
     {

@@ -1,4 +1,4 @@
-Shader "Custom/Blending"
+Shader "Dylan/Blending"
 {
     Properties
     {

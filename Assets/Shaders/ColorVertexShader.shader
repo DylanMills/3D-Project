@@ -1,4 +1,4 @@
-Shader "Unlit/ColorVertexShader"
+Shader "Dylan/ColorVertex"
 {
     Properties
     {

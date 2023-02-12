@@ -1,4 +1,4 @@
-Shader "Wall"
+Shader "Dylan/Wall"
 {
     Properties
     {

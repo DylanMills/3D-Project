@@ -1,4 +1,4 @@
-Shader "Custom/Hologram"
+Shader "Dylan/Hologram"
 {
     Properties
     {

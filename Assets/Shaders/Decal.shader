@@ -1,4 +1,4 @@
-Shader "Custom/Decal"
+Shader "Dylan/Decal"
 {
     Properties
     {

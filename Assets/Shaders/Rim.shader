@@ -1,10 +1,10 @@
-Shader "Custom/Rim"
+Shader "Dylan/Rim"
 {
     Properties
     {
         _RimPower ("Rim Power", Range(0,10))=1
          _RimColor ("Rim Color", Color) = (1, 0, 0, 1)
-        _Color ("Color", Color) = (1,1,1,1)
+         _Color ("Color", Color) = (1,1,1,1)
     }
     SubShader
     {

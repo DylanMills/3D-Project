@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Orbit : MonoBehaviour
 {
-
     [SerializeField] private GameObject target;
     [SerializeField] private float degreesPerSecond = 45;
 
@@ -14,7 +13,6 @@ public class Orbit : MonoBehaviour
         if (target)
         {
             transform.RotateAround(target.transform.position, Vector3.up, degreesPerSecond * Time.deltaTime);
-
         }
     }
 }

@@ -13,24 +13,28 @@ public class Bloom : MonoBehaviour
     const int ApplyBloomPass = 3;
     const int DebugBloomPass = 4;
 
-
     public Shader bloomShader;
     public bool debug;
 
+    [Range(0, 10)]
+    public float threshold = 1;
 
     [Range(1, 16)]
     public int iterations = 4;
 
     [Range(0, 10)]
-    public float threshold = 1;
-
-    [Range(0, 10)]
     public float intensity = 1;
 
-    RenderTexture[] textures = new RenderTexture[16];
+
+
+
 
     [NonSerialized]
     Material bloom;
+
+    RenderTexture[] textures = new RenderTexture[16];
+
+
 
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {

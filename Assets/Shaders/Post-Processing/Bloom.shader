@@ -1,4 +1,4 @@
-Shader "Alvaro/Custom/Bloom"
+Shader "Custom/Bloom"
 {
 	Properties {
 		_MainTex ("Texture", 2D) = "white" {}

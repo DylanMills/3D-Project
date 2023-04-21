@@ -3,63 +3,71 @@
  
  #### Dylan Mills 100750193 | Final Exam
 
- ## Forward and Deferred Rendering
-![Rendering](https://raw.githubusercontent.com/DylanMills/Jaws/main/Images/RenderingDiagram.png)
+![Preview](https://raw.githubusercontent.com/DylanMills/FinalExam/main/Images/screenshot1.png)
+![Preview](https://raw.githubusercontent.com/DylanMills/FinalExam/main/Images/screenshot2.png)
 
-## Additions
+## Water
 
 
-* Replaced Skybox
-* Added movement
-* Created scene
-* Optimized meshes to reduce file size
-* Reworked all materials, and shaders to match the project requirements
-* Completely revamped wave shader
-* Square shaped wave is possible via the following snippet(read the comments!)
+![MuddyWater](https://raw.githubusercontent.com/DylanMills/FinalExam/main/Images/muddywater.png)
+
+
+-  The water works by using the time variable to modulate the sine wave which displaces the vertices in the vertex shader. 
+-  The muddy tint is strongest at the lower wave height. At the high waveheight the blue texture is more visible
 ```   
+void vert (inout appdata v, out Input o){
+UNITY_INITIALIZE_OUTPUT(Input,o);
+float t = _Time * _Speed;
+float waveHeight = sin(t+v.vertex.x * _Freq)*_Amp+sin(t*2+v.vertex.x*_Freq*2)*_Amp;
+v.vertex.y+=waveHeight;
+v.normal=normalize(float3(v.normal.x+waveHeight,v.normal.y,v.normal.z));
+o.vertColor=(waveHeight)+_Tint*1.5;
 
+}
 ```
         
-* Bloom
+## Bloom
 -  Adjusted parameters
-* Outlining
--  Adjusted parameter margins
--  Added better color controls
--  Added functional color tinting
--  Various optimizations for improved performance
-* Hologram
-- Making use of Rim Shading to create phantom Sharks
+-  Bloom works by sampling the brightness and using that data to affect the brightness of surrounding pixels. The threshold affects the minimum brightness required to make the bloom effect
+-  Press 1 to toggle
 ```     
-            
-```
-![Rendering](https://raw.githubusercontent.com/DylanMills/Jaws/main/Images/RimDiagram.png)
+            		Interpolators VertexProgram (VertexData v) {
+			Interpolators i;
+			i.pos = UnityObjectToClipPos(v.vertex);
+			i.uv = v.uv;
+			return i;
+		}
+		
+		half3 Sample(float2 uv) {
+			return tex2D(_MainTex, uv).rgb;
+		}
 
-## Snippets
-### Downsample Script
-* This script downsamples using mipmapping
-* It creates a new render texture at the destination parameter
-* This is useful for optimizing graphics operations.
-* Mipmapping allows for the renderer to use less detailed textures when the texel / pixel size diffent is high.
+		half3 SampleBox(float2 uv, float delta) {
+			float4 o = _MainTex_TexelSize.xyxy * float2(-delta, delta).xxyy;
+			half3 s =
+				Sample(uv + o.xy) + Sample(uv + o.zy) +
+				Sample(uv + o.xw) + Sample(uv + o.zw);
+			return s * 0.25f;
+		}
+
+		half3 Prefilter(half3 c) {
+			half brightness = max(c.r, max(c.g, c.b));
+			half contribution = max(0, brightness - _Threshold);
+			contribution /= max(brightness, 0.00001);
+			return c * contribution;
+		}
 ```
 
-```
-### Colored Shadow:
-* This is a surface shader which uses a lambert lighting with a toon ramp
-* It takes ShadowColor as a parameter which is used to color the dark areas of the surface
-* This great for games with a simple art-style that wants to have a unique, stylized shadow color. 
 
-```
-
-  ```
 ## Download
 
-You can [download](https://github.com/DylanMills/Jaws/releases/tag/release) the build here.
+You can [download](https://github.com/DylanMills/FinalExam/releases/tag/release) the build here.
 
 
 ## Credits
 
 This software uses the following external assets:
 
-- [Skybox](https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633)
-- [Shark](https://www.cgtrader.com/items/24982/download-page)
-- [Ship](https://www.cgtrader.com/items/2712314/download-page)
+- [Turtle](https://giphy.com/stickers/xbox-xbox-series-x-s-tmnt-shredders-revenge-9msfv3VpgY31OcFXta)
+- [Brickwall](https://opengameart.org/content/brick-wall)
+- [Water](https://www.textures4photoshop.com/tex/water-and-liquid/water-pool-texture-seamless-and-free.aspx)

@@ -1,42 +1,37 @@
-Shader "Dylan/Wall"
-{
-    Properties
-    {
-
-        _MainTex("Diffuse", 2D) = "white" {}
-
-    
+  Shader "Dylan/Wall" {
+    Properties {
+      _MainTex ("Texture", 2D) = "white" {}
+      _BumpMap ("Bumpmap", 2D) = "bump" {}
+      _DecalTex ("Decal", 2D) = "decal" {}
     }
-        SubShader
-    {
-        Tags { "Queue" = "Geometry" }
+    SubShader {
+      Tags { "RenderType" = "Opaque" }
+      CGPROGRAM
+
+      #pragma surface surf BlinnPhong 
+
+      struct Input {
+        float2 uv_MainTex;
+        float2 uv_BumpMap;
+        float2 uv_DecalTex;
+      };
 
 
- Stencil {
-        Ref 1               // use 1 as the value to check against
-        Comp notequal       // If this stencil Ref 1 is not equal to what's in the stencil buffer, then we will keep this pixel that belongs to the Wall
-        Pass keep           // If you do find a 1, don't draw it.
-        }
+      sampler2D _MainTex;
+      sampler2D _BumpMap;
+      sampler2D _DecalTex;
+     
 
-        LOD 200
+      void surf (Input IN, inout SurfaceOutput o) {
+                  fixed4 a = tex2D(_MainTex, IN.uv_MainTex);
+            fixed4 b = tex2D(_DecalTex, IN.uv_DecalTex);
+            o.Albedo = b.rgb * a.rgb;
+            o.Albedo = b.g <0.4 ? 0.8*a.rgb : a.rgb;
+        
+        o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
+      }
 
-        CGPROGRAM
-
-        #pragma surface surf Lambert
-
-
-        sampler2D _MainTex;
-
-        struct Input
-        {
-            float2 uv_MainTex;
-        };
-        void surf(Input IN, inout SurfaceOutput o)
-        {
-            fixed4 c = tex2D(_MainTex, IN.uv_MainTex);
-            o.Albedo = c.rgb;
-        }
-        ENDCG
-    }
-        FallBack "Diffuse"
-}
+      ENDCG
+    } 
+    Fallback "Diffuse"
+  }

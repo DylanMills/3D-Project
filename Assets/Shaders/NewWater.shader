@@ -39,7 +39,7 @@ float t = _Time * _Speed;
 float waveHeight = sin(t+v.vertex.x * _Freq)*_Amp+sin(t*2+v.vertex.x*_Freq*2)*_Amp;
 v.vertex.y+=waveHeight;
 v.normal=normalize(float3(v.normal.x+waveHeight,v.normal.y,v.normal.z));
-o.vertColor=waveHeight+2;
+o.vertColor=(waveHeight)+_Tint*1.5;
 
 }
 

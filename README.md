@@ -3,13 +3,13 @@
  
  #### Dylan Mills 100750193 | Final Exam
 
-![Preview](https://raw.githubusercontent.com/DylanMills/FinalExam/main/Images/screenshot1.png)
-![Preview](https://raw.githubusercontent.com/DylanMills/FinalExam/main/Images/screenshot2.png)
+![Preview](https://raw.githubusercontent.com/DylanMills/3D-Project/main/Images/screenshot1.png)
+![Preview](https://raw.githubusercontent.com/DylanMills/3D-Project/main/Images/screenshot2.png)
 
 ## Water
 
 
-![MuddyWater](https://raw.githubusercontent.com/DylanMills/FinalExam/main/Images/muddywater.png)
+![MuddyWater](https://raw.githubusercontent.com/DylanMills/3D-Project/main/Images/muddywater.png)
 
 
 -  The water works by using the time variable to modulate the sine wave which displaces the vertices in the vertex shader. 
@@ -61,7 +61,7 @@ o.vertColor=(waveHeight)+_Tint*1.5;
 
 ## Download
 
-You can [download](https://github.com/DylanMills/FinalExam/releases/tag/release) the build here.
+You can [download](https://github.com/DylanMills/3D-Project/releases/tag/release) the build here.
 
 
 ## Credits
